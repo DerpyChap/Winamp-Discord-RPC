@@ -4,7 +4,6 @@ import os
 import time
 import rpc
 from tinytag import TinyTag #Amazing for pulling text metadata from various filetypes easily, terrible for album art.
-from mutagen import File #Annoying for text metadata, also annoying for album art. But hey, I can at least get album art with this one.
 import difflib
 import asyncio
 import textwrap
