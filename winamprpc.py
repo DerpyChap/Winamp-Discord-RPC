@@ -55,17 +55,14 @@ def song_info(filepath, position):
                 audio = TinyTag.get(filepath)
         else: #Give up.
             pass
-    try:
-        artist = audio.artist
-    except:
+    artist = audio.artist
+    song = audio.title
+    album = audio.album
+    if not artist:
         artist = "Unknown Artist"
-    try:
-        song = audio.title
-    except:
+    if not song:
         song = "Unknown Song"
-    try:
-        album = audio.album
-    except:
+    if not album:
         album = "Unknown Album"
     return(" 👤 " + artist, "🎵 " + song, " 💿 " + album)
 
