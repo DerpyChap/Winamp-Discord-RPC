@@ -4,6 +4,7 @@ import os
 import time
 import rpc
 from tinytag import TinyTag #Amazing for pulling text metadata from various filetypes easily, terrible for album art.
+from mutagen import File #Annoying for text metadata, also annoying for album art. But hey, I can at least get album art with this one.
 import difflib
 import asyncio
 import textwrap
@@ -15,24 +16,17 @@ RPC = rpc.DiscordRPC(client_id)
 RPC.start()
 
 def text_format(songinfo):
-    #Discord Rich Embeds don't support newlines, so I'll have to get creative. This also makes it look broken on mobile and on your main profie.
+    #Discord now force rich presence messages to a single line >:(
     artist = songinfo[0]
     track = songinfo[1]
     album = songinfo[2]
-    if len(artist) >= 32:
+    if len(artist) >= 24:
         artist = artist[0:24] + "..."
-    if len(track) >= 32:
+    if len(track) >= 24:
         track = songinfo[1][0:24] + "..."
-    if len(album) >= 32:
+    if len(album) >= 24:
         album = songinfo[2][0:24] + "..."
 
-    if len(textwrap.fill(track, 16).splitlines()[-1]) <= 24:
-        blankspaces = ''.join(['ᅟ' for s in range(24 - len(textwrap.fill(track, 12).splitlines()[-1]))])
-        track = track + blankspaces
-    if len(textwrap.fill(artist, 16).splitlines()[-1]) <= 24:
-        blankspaces = ''.join(['ᅟ' for s in range(24 - len(textwrap.fill(artist, 12).splitlines()[-1]))])
-        artist = artist + blankspaces
-    #I honestly have no idea what I was doing here but it works well enough somehow.
     return track + artist + album
     
 
@@ -73,7 +67,7 @@ def song_info(filepath, position):
         album = audio.album
     except:
         album = "Unknown Album"
-    return("👤 " + artist, "🎵 " + song, "💿 " + album)
+    return(" 👤 " + artist, "🎵 " + song, " 💿 " + album)
 
 posbefore = 0
 playlistbefore = []
