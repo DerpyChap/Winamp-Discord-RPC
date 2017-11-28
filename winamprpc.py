@@ -20,12 +20,12 @@ def text_format(songinfo):
     artist = songinfo[0]
     track = songinfo[1]
     album = songinfo[2]
-    if len(artist) >= 24:
+    if len(artist) >= 25:
         artist = artist[0:24] + "..."
-    if len(track) >= 24:
-        track = songinfo[1][0:24] + "..."
-    if len(album) >= 24:
-        album = songinfo[2][0:24] + "..."
+    if len(track) >= 25:
+        track = track[0:24] + "..."
+    if len(album) >= 25:
+        album = album[0:24] + "..."
 
     return track + artist + album
     
