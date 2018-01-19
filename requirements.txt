@@ -1,0 +1,3 @@
+tinytag
+mutagen
+pypiwin32
